@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
+import os
 
 app = Flask(__name__)
 
@@ -8,6 +9,9 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root@1234'
 app.config['MYSQL_DB'] = 'talentbridge'
+
+# Upload Folder
+app.config['UPLOAD_FOLDER'] = 'uploads'
 
 mysql = MySQL(app)
 
@@ -36,7 +40,7 @@ def register():
         mysql.connection.commit()
         cur.close()
 
-        return "Registration Successful"
+        return redirect('/login')
 
     return render_template('register.html')
 
@@ -65,5 +69,34 @@ def login():
         return "Invalid Email or Password"
 
     return render_template('login.html')
+@app.route('/upload_resume', methods=['POST'])
+def upload_resume():
+
+    file = request.files.get('resume')
+    email = request.form.get('email')
+
+    if not file:
+        return "No file selected"
+
+    filename = file.filename
+
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
+
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+    if email:
+        cur = mysql.connection.cursor()
+
+        cur.execute(
+            "UPDATE students SET resume=%s WHERE email=%s",
+            (filename, email)
+        )
+
+        mysql.connection.commit()
+        cur.close()
+
+    return "Resume Uploaded Successfully ✅"
+
 if __name__ == '__main__':
     app.run(debug=True)
