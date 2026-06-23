@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - TalentBridge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="form-box">
+        <h1>Create Account</h1>
+
+        <form action="/register" method="POST">
+
+            <div class="input-group">
+                <input type="text" name="name" placeholder="Full Name" required>
+            </div>
+
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="course" placeholder="Course" required>
+            </div>
+
+            <div class="input-group">
+                <textarea name="skills" placeholder="Skills"></textarea>
+            </div>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p>Already have an account? <a href="/login">Login</a></p>
+
+    </div>
+</div>
+
+</body>
+</html>
