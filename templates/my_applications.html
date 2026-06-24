@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Applications</title>
+</head>
+<body>
+
+<h2>My Applications</h2>
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>Company</th>
+    <th>Job Title</th>
+    <th>Applied Date</th>
+</tr>
+
+{% for app in applications %}
+
+<tr>
+    <td>{{ app[2] }}</td>
+    <td>{{ app[3] }}</td>
+    <td>{{ app[4] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

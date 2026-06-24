@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Jobs</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/manage_jobs.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Manage Jobs</h1>
+
+    
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Deadline</th>
+            <th>Action</th>
+        </tr>
+
+        {% for job in jobs %}
+
+        <tr>
+
+            <td>{{ job[0] }}</td>
+            <td>{{ job[1] }}</td>
+            <td>{{ job[2] }}</td>
+            <td>{{ job[4] }}</td>
+            <td>{{ job[5] }}</td>
+            <td>{{ job[6] }}</td>
+
+            <td>
+                <a href="/delete_job/{{ job[0] }}"
+                   class="delete-btn">
+                   Delete
+                </a>
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

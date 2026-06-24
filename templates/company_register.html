@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Register</title>
+    <link rel="stylesheet"
+href="{{ url_for('static', filename='css/company_auth.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Company Register</h1>
+
+    <form method="POST">
+
+        <div class="input-group">
+            <input type="text"
+                   name="company_name"
+                   placeholder="Company Name"
+                   required>
+        </div>
+
+        <div class="input-group">
+            <input type="email"
+                   name="email"
+                   placeholder="Company Email"
+                   required>
+        </div>
+
+        <div class="input-group">
+            <input type="password"
+                   name="password"
+                   placeholder="Password"
+                   required>
+        </div>
+
+        <button type="submit">
+            Register
+        </button>
+        <a href="/" class="back-btn">
+    ← Back to Home
+</a>
+
+    </form>
+
+    <div class="bottom-text">
+        Already Registered?
+        <a href="/company_login">Login</a>
+    </div>
+
+</div>
+
+</body>
+</html>

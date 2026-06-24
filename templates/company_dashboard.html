@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/company_dashboard.css') }}">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        {{ company[1] }}
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/add_job">
+            <i class='bx bx-plus-circle'></i>
+            Post Job
+        </a>
+
+        <a href="/view_applications">
+            <i class='bx bxs-file'></i>
+            Applicants
+        </a>
+
+        <a href="/">
+            <i class='bx bx-log-out'></i>
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="main-content">
+
+    <div class="banner">
+
+        <h1>Welcome {{ company[1] }} 👋</h1>
+
+        <p>Manage Jobs and View Applicants</p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <i class='bx bxs-briefcase'></i>
+            <h2>{{ total_jobs }}</h2>
+<p>Jobs Posted</p>
+        </div>
+
+        <div class="card">
+            <i class='bx bxs-user'></i>
+           <h2>{{ total_applications }}</h2>
+<p>Applicants</p>
+        </div>
+<!-- Recent Jobs -->
+
+<div class="recent-section">
+
+    <h2>Recent Jobs</h2>
+
+    <div class="activity-box">
+        <p>💼 Python Developer</p>
+        <p>💼 Frontend Developer</p>
+        <p>💼 Software Engineer</p>
+    </div>
+
+</div>
+
+<!-- Recent Applicants -->
+
+<div class="recent-section">
+
+    <h2>Recent Applicants</h2>
+
+    <div class="activity-box">
+        <p>👨‍🎓 student1@gmail.com</p>
+        <p>👨‍🎓 student2@gmail.com</p>
+        <p>👨‍🎓 student3@gmail.com</p>
+    </div>
+
+</div>
+    </div>
+
+</div>
+
+</body>
+</html>

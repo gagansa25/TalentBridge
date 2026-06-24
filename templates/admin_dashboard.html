@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentBridge Admin Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+<!-- Navbar -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        TalentBridge Admin
+    </div>  
+<div class="nav-links">
+
+    <a href="/manage_students">
+        <i class='bx bxs-user'></i>
+        Students
+    </a>
+
+    <a href="/manage_jobs">
+        <i class='bx bxs-briefcase'></i>
+        Jobs
+    </a>
+
+    <a href="/add_job">
+        <i class='bx bx-plus-circle'></i>
+        Add Job
+    </a>
+
+    <a href="/company_login">
+        <i class='bx bxs-building'></i>
+        Company Login
+    </a>
+
+    <a href="/" class="logout-btn">
+        <i class='bx bx-log-out'></i>
+        Logout
+    </a>
+
+</div>
+
+</nav>
+
+<!-- Main Content -->
+
+<div class="main-content">
+
+    <!-- Welcome Banner -->
+
+    <div class="banner">
+
+        <h1>Welcome Back Administrator 👋</h1>
+
+        <p>
+            Manage Placement Activities Efficiently
+        </p>
+
+    </div>
+
+    <!-- Statistics Cards -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <i class='bx bxs-user'></i>
+
+            <h2>{{ total_students }}</h2>
+
+            <p>Total Students</p>
+
+        </div>
+
+        <div class="card">
+
+            <i class='bx bxs-briefcase'></i>
+
+            <h2>{{ total_jobs }}</h2>
+
+            <p>Total Jobs</p>
+
+        </div>
+
+        <div class="card">
+
+            <i class='bx bxs-file'></i>
+
+            <h2>{{ total_applications }}</h2>
+             <p>Applications</p>
+
+        </div>
+
+        <div class="card">
+
+            <i class='bx bxs-building'></i>
+
+            <h2>{{ total_companies }}</h2>
+<p>Companies</p>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="quick-actions">
+
+        <a href="/manage_students" class="action-btn">
+            <i class='bx bxs-user'></i>
+            Manage Students
+        </a>
+
+        <a href="/manage_jobs" class="action-btn">
+            <i class='bx bxs-briefcase'></i>
+            Manage Jobs
+        </a>
+
+        <a href="/add_job" class="action-btn">
+            <i class='bx bx-plus-circle'></i>
+            Add New Job
+        </a>
+
+    </div>
+
+    <!-- Recent Activity -->
+
+    <div class="section">
+
+        <h2>Recent Activity</h2>
+
+        <div class="activity-box">
+
+            <p>✅ New Student Registered</p>
+
+            <p>✅ Python Developer Job Added</p>
+
+            <p>✅ Resume Uploaded</p>
+
+        </div>
+
+    </div>
+
+    <!-- Analytics -->
+
+<div class="analytics-card">
+    <h3>Applications Received</h3>
+    <h2>{{ total_applications }}</h2>
+</div>
+
+<div class="analytics-card">
+    <h3>Registered Companies</h3>
+    <h2>{{ total_companies }}</h2>
+</div>
+    </div>
+
+</div>
+
+</body>
+</html>
