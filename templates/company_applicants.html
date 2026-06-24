@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Applicants</title>
+
+    <style>
+
+        body{
+            font-family:'Segoe UI',sans-serif;
+            background:#f4f6f9;
+            padding:20px;
+        }
+
+        h1{
+            color:#2563eb;
+            margin-bottom:20px;
+        }
+
+        table{
+            width:100%;
+            background:white;
+            border-collapse:collapse;
+            box-shadow:0 4px 12px rgba(0,0,0,.1);
+        }
+
+        th{
+            background:#2563eb;
+            color:white;
+        }
+
+        th,td{
+            padding:12px;
+            border:1px solid #ddd;
+            text-align:left;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<h1>Job Applicants</h1>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Student Email</th>
+    <th>Company</th>
+    <th>Job Title</th>
+    <th>Applied Date</th>
+</tr>
+
+{% for app in applications %}
+
+<tr>
+
+    <td>{{ app[0] }}</td>
+    <td>{{ app[1] }}</td>
+    <td>{{ app[2] }}</td>
+    <td>{{ app[3] }}</td>
+    <td>{{ app[4] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

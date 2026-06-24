@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+
 from flask import Flask, render_template, request, redirect, send_from_directory
 from flask_mysqldb import MySQL
 import os
@@ -436,8 +436,10 @@ def company_login():
         if company:
 
             # Total Jobs
-            cur.execute("SELECT COUNT(*) FROM jobs")
-            total_jobs = cur.fetchone()[0]
+            cur.execute(
+    "SELECT COUNT(*) FROM jobs WHERE company_name=%s",
+    (company[1],)
+)
 
             # Total Applications
             cur.execute("SELECT COUNT(*) FROM applications")
@@ -448,7 +450,6 @@ def company_login():
             return render_template(
                 'company_dashboard.html',
                 company=company,
-                total_jobs=total_jobs,
                 total_applications=total_applications
             )
 
@@ -457,6 +458,89 @@ def company_login():
         return "Invalid Credentials"
 
     return render_template('company_login.html')
+
+@app.route('/manage_companies')
+def manage_companies():
+
+    cur = mysql.connection.cursor()
+
+    cur.execute("SELECT * FROM companies")
+
+    companies = cur.fetchall()
+
+    cur.close()
+
+    return render_template(
+        'manage_companies.html',
+        companies=companies
+    )
+
+@app.route('/delete_company/<int:id>')
+def delete_company(id):
+
+    cur = mysql.connection.cursor()
+
+    cur.execute(
+        "DELETE FROM companies WHERE id=%s",
+        (id,)
+    )
+
+    mysql.connection.commit()
+
+    cur.close()
+
+    return redirect('/manage_companies')
+
+@app.route('/delete_student/<int:id>')
+def delete_student(id):
+
+    cur = mysql.connection.cursor()
+
+    cur.execute(
+        "DELETE FROM students WHERE id=%s",
+        (id,)
+    )
+
+    mysql.connection.commit()
+
+    cur.close()
+
+    return redirect('/manage_students')
+@app.route('/update_status/<int:id>/<status>')
+def update_status(id, status):
+
+    cur = mysql.connection.cursor()
+
+    cur.execute(
+        "UPDATE students SET placement_status=%s WHERE id=%s",
+        (status, id)
+    )
+
+    mysql.connection.commit()
+
+    cur.close()
+
+    return redirect('/manage_students')
+
+@app.route('/company_applicants')
+def company_applicants():
+
+    cur = mysql.connection.cursor()
+
+    cur.execute("""
+        SELECT *
+        FROM applications
+        ORDER BY applied_at DESC
+    """)
+
+    applications = cur.fetchall()
+
+    cur.close()
+
+    return render_template(
+        'company_applicants.html',
+        applications=applications
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Companies</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='css/manage_companies.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Manage Companies</h1>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Company Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+        {% for company in companies %}
+
+        <tr>
+
+            <td>{{ company[0] }}</td>
+            <td>{{ company[1] }}</td>
+            <td>{{ company[2] }}</td>
+
+            <td>
+                <a href="/delete_company/{{ company[0] }}"
+                   class="delete-btn">
+                    Delete
+                </a>
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

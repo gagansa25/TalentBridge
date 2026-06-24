@@ -18,35 +18,41 @@
 
     <div class="logo">
         TalentBridge Admin
-    </div>  
-<div class="nav-links">
+    </div>
 
-    <a href="/manage_students">
-        <i class='bx bxs-user'></i>
-        Students
-    </a>
+    <div class="nav-links">
 
-    <a href="/manage_jobs">
-        <i class='bx bxs-briefcase'></i>
-        Jobs
-    </a>
+        <a href="/manage_students">
+            <i class='bx bxs-user'></i>
+            Students
+        </a>
 
-    <a href="/add_job">
-        <i class='bx bx-plus-circle'></i>
-        Add Job
-    </a>
+        <a href="/manage_jobs">
+            <i class='bx bxs-briefcase'></i>
+            Jobs
+        </a>
 
-    <a href="/company_login">
-        <i class='bx bxs-building'></i>
-        Company Login
-    </a>
+        <a href="/add_job">
+            <i class='bx bx-plus-circle'></i>
+            Add Job
+        </a>
 
-    <a href="/" class="logout-btn">
-        <i class='bx bx-log-out'></i>
-        Logout
-    </a>
+        <a href="/company_login">
+            <i class='bx bxs-building'></i>
+            Company Login
+        </a>
 
-</div>
+        <a href="/manage_companies">
+            <i class='bx bxs-building-house'></i>
+            Companies
+        </a>
+
+        <a href="/" class="logout-btn">
+            <i class='bx bx-log-out'></i>
+            Logout
+        </a>
+
+    </div>
 
 </nav>
 
@@ -95,7 +101,8 @@
             <i class='bx bxs-file'></i>
 
             <h2>{{ total_applications }}</h2>
-             <p>Applications</p>
+
+            <p>Applications</p>
 
         </div>
 
@@ -104,7 +111,8 @@
             <i class='bx bxs-building'></i>
 
             <h2>{{ total_companies }}</h2>
-<p>Companies</p>
+
+            <p>Companies</p>
 
         </div>
 
@@ -129,6 +137,11 @@
             Add New Job
         </a>
 
+        <a href="/manage_companies" class="action-btn">
+            <i class='bx bxs-building'></i>
+            Manage Companies
+        </a>
+
     </div>
 
     <!-- Recent Activity -->
@@ -145,21 +158,32 @@
 
             <p>✅ Resume Uploaded</p>
 
+            <p>✅ Company Registered</p>
+
         </div>
 
     </div>
 
     <!-- Analytics -->
 
-<div class="analytics-card">
-    <h3>Applications Received</h3>
-    <h2>{{ total_applications }}</h2>
-</div>
+    <div class="analytics">
 
-<div class="analytics-card">
-    <h3>Registered Companies</h3>
-    <h2>{{ total_companies }}</h2>
-</div>
+        <div class="analytics-card">
+
+            <h3>Applications Received</h3>
+
+            <h2>{{ total_applications }}</h2>
+
+        </div>
+
+        <div class="analytics-card">
+
+            <h3>Registered Companies</h3>
+
+            <h2>{{ total_companies }}</h2>
+
+        </div>
+
     </div>
 
 </div>
