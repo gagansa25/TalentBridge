@@ -6,9 +6,10 @@
     <title>TalentBridge Admin Dashboard</title>
 
     <link rel="stylesheet"
-    href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+          href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet">
 </head>
 <body>
 
@@ -37,14 +38,14 @@
             Add Job
         </a>
 
-        <a href="/company_login">
+        <a href="/manage_companies">
             <i class='bx bxs-building'></i>
-            Company Login
+            Companies
         </a>
 
-        <a href="/manage_companies">
+        <a href="/company_login">
             <i class='bx bxs-building-house'></i>
-            Companies
+            Company Portal
         </a>
 
         <a href="/" class="logout-btn">
@@ -56,64 +57,46 @@
 
 </nav>
 
-<!-- Main Content -->
+<!-- Main -->
 
 <div class="main-content">
 
-    <!-- Welcome Banner -->
-
     <div class="banner">
 
-        <h1>Welcome Back Administrator 👋</h1>
+        <h1>Welcome Administrator 👋</h1>
 
         <p>
-            Manage Placement Activities Efficiently
+            Manage Students, Companies, Jobs and Placement Activities
         </p>
 
     </div>
 
-    <!-- Statistics Cards -->
+    <!-- Statistics -->
 
     <div class="cards">
 
         <div class="card">
-
             <i class='bx bxs-user'></i>
-
             <h2>{{ total_students }}</h2>
-
             <p>Total Students</p>
-
         </div>
 
         <div class="card">
-
             <i class='bx bxs-briefcase'></i>
-
             <h2>{{ total_jobs }}</h2>
-
             <p>Total Jobs</p>
-
         </div>
 
         <div class="card">
-
             <i class='bx bxs-file'></i>
-
             <h2>{{ total_applications }}</h2>
-
             <p>Applications</p>
-
         </div>
 
         <div class="card">
-
             <i class='bx bxs-building'></i>
-
             <h2>{{ total_companies }}</h2>
-
             <p>Companies</p>
-
         </div>
 
     </div>
@@ -134,7 +117,7 @@
 
         <a href="/add_job" class="action-btn">
             <i class='bx bx-plus-circle'></i>
-            Add New Job
+            Add Job
         </a>
 
         <a href="/manage_companies" class="action-btn">
@@ -153,12 +136,9 @@
         <div class="activity-box">
 
             <p>✅ New Student Registered</p>
-
-            <p>✅ Python Developer Job Added</p>
-
-            <p>✅ Resume Uploaded</p>
-
-            <p>✅ Company Registered</p>
+            <p>💼 New Job Posted</p>
+            <p>📄 Resume Uploaded</p>
+            <p>🏢 Company Registered</p>
 
         </div>
 
@@ -169,19 +149,23 @@
     <div class="analytics">
 
         <div class="analytics-card">
-
             <h3>Applications Received</h3>
-
             <h2>{{ total_applications }}</h2>
-
         </div>
 
         <div class="analytics-card">
-
             <h3>Registered Companies</h3>
-
             <h2>{{ total_companies }}</h2>
+        </div>
 
+        <div class="analytics-card">
+            <h3>Placed Students</h3>
+            <h2>{{ placed_students }}</h2>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Not Placed Students</h3>
+            <h2>{{ not_placed_students }}</h2>
         </div>
 
     </div>

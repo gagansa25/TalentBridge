@@ -4,11 +4,14 @@
     <title>Company Dashboard</title>
 
     <link rel="stylesheet"
-    href="{{ url_for('static', filename='css/company_dashboard.css') }}">
+          href="{{ url_for('static', filename='css/company_dashboard.css') }}">
 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          rel="stylesheet">
 </head>
 <body>
+
+<!-- Navbar -->
 
 <nav class="navbar">
 
@@ -37,34 +40,44 @@
 
 </nav>
 
+<!-- Main Content -->
+
 <div class="main-content">
+
+    <!-- Banner -->
 
     <div class="banner">
 
         <h1>Welcome {{ company[1] }} 👋</h1>
 
-        <p>Manage Jobs and View Applicants</p>
+        <p>
+            Manage Jobs and View Applicants
+        </p>
 
     </div>
 
-    <!-- Cards -->
+    <!-- Dashboard Cards -->
 
     <div class="cards">
 
         <div class="card">
+
             <i class='bx bxs-briefcase'></i>
 
             <h2>{{ total_jobs }}</h2>
 
             <p>Jobs Posted</p>
+
         </div>
 
         <div class="card">
+
             <i class='bx bxs-user'></i>
 
             <h2>{{ total_applications }}</h2>
 
             <p>Applicants</p>
+
         </div>
 
     </div>
@@ -77,9 +90,21 @@
 
         <div class="activity-box">
 
-            <p>💼 Python Developer</p>
-            <p>💼 Frontend Developer</p>
-            <p>💼 Software Engineer</p>
+            {% if recent_jobs %}
+
+                {% for job in recent_jobs %}
+
+                    <p>
+                        💼 {{ job[2] }}
+                    </p>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>No jobs posted yet.</p>
+
+            {% endif %}
 
         </div>
 
@@ -91,21 +116,42 @@
 
         <h2>Recent Applicants</h2>
 
-        <div class="activity-box">
+       <div class="activity-box">
 
-            <p>👨‍🎓 student1@gmail.com</p>
-            <p>👨‍🎓 student2@gmail.com</p>
-            <p>👨‍🎓 student3@gmail.com</p>
+{% if recent_applications %}
+
+    {% for app in recent_applications %}
+
+        <div class="applicant-item">
+
+            <strong>👨‍🎓 {{ app[1] }}</strong><br>
+
+            <small>
+                {{ app[3] }}
+            </small><br>
+
+            <small>
+                {{ app[4] }}
+            </small>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+{% else %}
+
+    <p>No applicants yet.</p>
+
+{% endif %}
+
+</div>
 
         </div>
 
     </div>
-    {% for job in jobs %}
-<p>💼 {{ job[2] }}</p>
-{% endfor %}
-{% for app in applications %}
-<p>👨‍🎓 {{ app[1] }}</p>
-{% endfor %}
+
 </div>
 
 </body>

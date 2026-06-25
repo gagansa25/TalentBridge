@@ -270,6 +270,22 @@ def admin_dashboard():
     cur.execute("SELECT COUNT(*) FROM companies")
     total_companies = cur.fetchone()[0]
 
+    # Placed Students
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM students
+        WHERE placement_status='Placed'
+    """)
+    placed_students = cur.fetchone()[0]
+
+    # Not Placed Students
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM students
+        WHERE placement_status='Not Placed'
+    """)
+    not_placed_students = cur.fetchone()[0]
+
     cur.close()
 
     return render_template(
@@ -277,14 +293,32 @@ def admin_dashboard():
         total_students=total_students,
         total_jobs=total_jobs,
         total_applications=total_applications,
-        total_companies=total_companies
+        total_companies=total_companies,
+        placed_students=placed_students,
+        not_placed_students=not_placed_students
     )
 @app.route('/manage_students')
 def manage_students():
 
+    search = request.args.get('search')
+
     cur = mysql.connection.cursor()
 
-    cur.execute("SELECT * FROM students")
+    if search:
+
+        cur.execute("""
+            SELECT *
+            FROM students
+            WHERE name LIKE %s
+            OR email LIKE %s
+        """, (
+            '%' + search + '%',
+            '%' + search + '%'
+        ))
+
+    else:
+
+        cur.execute("SELECT * FROM students")
 
     students = cur.fetchall()
 
@@ -416,7 +450,7 @@ def company_register():
     return render_template(
         'company_register.html'
     )
-@app.route('/company_login', methods=['GET','POST'])
+@app.route('/company_login', methods=['GET', 'POST'])
 def company_login():
 
     if request.method == 'POST':
@@ -426,6 +460,7 @@ def company_login():
 
         cur = mysql.connection.cursor()
 
+        # Company Login
         cur.execute(
             "SELECT * FROM companies WHERE email=%s AND password=%s",
             (email, password)
@@ -435,22 +470,51 @@ def company_login():
 
         if company:
 
-            # Total Jobs
+            # Total Jobs Posted by this Company
             cur.execute(
-    "SELECT COUNT(*) FROM jobs WHERE company_name=%s",
-    (company[1],)
-)
+                "SELECT COUNT(*) FROM jobs WHERE company_name=%s",
+                (company[1],)
+            )
+            total_jobs = cur.fetchone()[0]
 
-            # Total Applications
-            cur.execute("SELECT COUNT(*) FROM applications")
+            # Total Applications for this Company
+            cur.execute(
+                "SELECT COUNT(*) FROM applications WHERE company_name=%s",
+                (company[1],)
+            )
             total_applications = cur.fetchone()[0]
+
+            # Recent Jobs
+            cur.execute("""
+                SELECT *
+                FROM jobs
+                WHERE company_name=%s
+                ORDER BY id DESC
+                LIMIT 5
+            """, (company[1],))
+
+            recent_jobs = cur.fetchall()
+
+            # Recent Applicants
+            cur.execute("""
+                SELECT *
+                FROM applications
+                WHERE company_name=%s
+                ORDER BY applied_at DESC
+                LIMIT 5
+            """, (company[1],))
+
+            recent_applications = cur.fetchall()
 
             cur.close()
 
             return render_template(
                 'company_dashboard.html',
                 company=company,
-                total_applications=total_applications
+                total_jobs=total_jobs,
+                total_applications=total_applications,
+                recent_jobs=recent_jobs,
+                recent_applications=recent_applications
             )
 
         cur.close()
@@ -462,9 +526,25 @@ def company_login():
 @app.route('/manage_companies')
 def manage_companies():
 
+    search = request.args.get('search')
+
     cur = mysql.connection.cursor()
 
-    cur.execute("SELECT * FROM companies")
+    if search:
+
+        cur.execute("""
+            SELECT *
+            FROM companies
+            WHERE company_name LIKE %s
+            OR email LIKE %s
+        """, (
+            '%' + search + '%',
+            '%' + search + '%'
+        ))
+
+    else:
+
+        cur.execute("SELECT * FROM companies")
 
     companies = cur.fetchall()
 
@@ -541,6 +621,9 @@ def company_applicants():
         'company_applicants.html',
         applications=applications
     )
+@app.route('/company_dashboard')
+def company_dashboard():
+    return redirect('/company_login')
 
 if __name__ == '__main__':
     app.run(debug=True)
