@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TalentBridge</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
 
@@ -33,68 +34,87 @@
 
     <main class="home-layout">
         <section class="hero">
-            <h1>Bridging Students and Recruiters</h1>
-            <p>Find opportunities, showcase skills, and build your career.</p>
+            <div class="hero-copy">
+                <span class="hero-eyebrow">Campus Placement Portal</span>
+                <h1>Connect talent with the right career opportunities.</h1>
+                <p>TalentBridge helps students showcase skills, companies discover candidates, and placement teams track hiring activity from one simple portal.</p>
 
-            <div class="buttons">
+                <div class="buttons">
+                    <a href="/register" class="btn">
+                        Start as Student
+                    </a>
 
-                <a href="/register" class="btn">
-                    Student Register
-                </a>
+                    <a href="/company_register" class="btn-outline">
+                        Hire Talent
+                    </a>
+                </div>
+            </div>
 
-                <a href="/company_register" class="btn-outline">
-                    Company Register
-                </a>
+            <div class="hero-panel" aria-label="Placement process highlights">
+                <div class="panel-header">
+                    <span>Placement Flow</span>
+                    <strong>Live</strong>
+                </div>
 
+                <div class="panel-intro">
+                    <p>Discover jobs, track applications, and manage campus placements from a single student-first portal designed for every stakeholder.</p>
+                </div>
+
+                <div class="stats-list">
+                    <div class="stat-item">
+                        <strong>120+</strong>
+                        <p>Open roles available now</p>
+                    </div>
+                    <div class="stat-item">
+                        <strong>50+</strong>
+                        <p>Approved companies hiring</p>
+                    </div>
+                </div>
+
+                <div class="flow-list">
+                    <div class="flow-item">
+                        <span>1</span>
+                        <div>
+                            <h3>Students build profiles</h3>
+                            <p>Skills, course details, and placement status stay ready for recruiters.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-item">
+                        <span>2</span>
+                        <div>
+                            <h3>Companies post jobs</h3>
+                            <p>Open roles and deadlines appear instantly for eligible students.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-item">
+                        <span>3</span>
+                        <div>
+                            <h3>Admins track outcomes</h3>
+                            <p>Placement progress, active jobs, and company activity remain visible.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="news-section">
-            <div class="news-header">
-                <div>
-                    <span class="eyebrow">Latest Updates</span>
-                    <h2>News Flash</h2>
-                </div>
-
-                <a href="/jobs" class="view-jobs">View Jobs</a>
-            </div>
-
-            <div class="stats-row">
-                <div class="stat-box">
-                    <strong>{{ stats.active_jobs }}</strong>
-                    <span>Active Jobs</span>
-                </div>
-
-                <div class="stat-box">
-                    <strong>{{ stats.companies }}</strong>
-                    <span>Companies</span>
-                </div>
-
-                <div class="stat-box">
-                    <strong>{{ stats.placed_students }}</strong>
-                    <span>Completed Placements</span>
-                </div>
-            </div>
-
-            <div class="news-grid">
-                {% if news_items %}
-                    {% for item in news_items %}
-                        <article class="news-card">
-                            <span>{{ item.label }}</span>
-                            <h3>{{ item.title }}</h3>
-                            <p>{{ item.detail }}</p>
-                            <small>{{ item.meta }}</small>
-                        </article>
-                    {% endfor %}
-                {% else %}
-                    <article class="news-card empty-news">
-                        <span>News Flash</span>
-                        <h3>No updates yet</h3>
-                        <p>New company visits, job posts, and completed placements will appear here.</p>
-                        <small>Check back soon</small>
-                    </article>
-                {% endif %}
-            </div>
+        <section class="home-features">
+            <article class="feature-card">
+                <span>Student Hub</span>
+                <h3>Build a profile that gets noticed</h3>
+                <p>Showcase your skills, coursework, and placement readiness with a clear, recruiter-friendly profile.</p>
+            </article>
+            <article class="feature-card">
+                <span>Employer Reach</span>
+                <h3>Post jobs that attract top talent</h3>
+                <p>Share roles, deadlines, and eligibility in one place so students can apply quickly and confidently.</p>
+            </article>
+            <article class="feature-card">
+                <span>Placement Insights</span>
+                <h3>Keep everyone aligned</h3>
+                <p>View live placement metrics, active opportunities, and hiring activity from a single dashboard.</p>
+            </article>
         </section>
     </main>
 

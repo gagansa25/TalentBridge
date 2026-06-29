@@ -1,0 +1,93 @@
+:root {
+    --bg-start: #0f172a;
+    --bg-end: #1e293b;
+    --panel-bg: rgba(255, 255, 255, 0.12);
+    --panel-border: rgba(255, 255, 255, 0.18);
+    --text-light: #f8fafc;
+    --text-muted: #cbd5e1;
+    --accent: #fbbf24;
+    --accent-dark: #c2410c;
+    --button-bg: #fbbf24;
+    --button-text: #0f172a;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-start), #0b1120 55%, var(--bg-end));
+    color: var(--text-light);
+}
+
+.hero-eyebrow {
+    background: rgba(251, 191, 36, 0.16);
+    border-color: rgba(251, 191, 36, 0.25);
+    color: var(--accent);
+}
+
+.hero h1,
+.hero p {
+    color: var(--text-light);
+}
+
+.hero-panel {
+    background: var(--panel-bg);
+    border-color: var(--panel-border);
+}
+
+.panel-header strong {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--accent-dark);
+}
+
+.panel-intro p,
+.flow-item p,
+.stat-item p {
+    color: var(--text-muted);
+}
+
+.flow-item {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.flow-item > span {
+    background: var(--button-bg);
+    color: var(--button-text);
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.btn {
+    background: var(--button-bg);
+    color: var(--button-text);
+}
+
+.btn-outline {
+    border-color: rgba(255, 255, 255, 0.85);
+    color: var(--text-light);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--button-text);
+}
+
+nav {
+    background: rgba(15, 23, 42, 0.36);
+}
+
+nav a:hover {
+    background: rgba(251, 191, 36, 0.14);
+}
+
+.feature-card,
+.home-panel,
+.home-news-section,
+.hero-panel {
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+}
+
+@media (max-width: 900px) {
+    .hero h1 {
+        color: var(--text-light);
+    }
+}
