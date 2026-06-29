@@ -19,7 +19,71 @@ mysql = MySQL(app)
 # Home Page
 @app.route('/')
 def home():
-    return render_template('index.html')
+    news_items = []
+    stats = {
+        'active_jobs': 0,
+        'companies': 0,
+        'placed_students': 0
+    }
+
+    try:
+        cur = mysql.connection.cursor()
+
+        cur.execute("""
+            SELECT company_name, job_title, deadline
+            FROM jobs
+            ORDER BY id DESC
+            LIMIT 3
+        """)
+        recent_jobs = cur.fetchall()
+
+        for job in recent_jobs:
+            news_items.append({
+                'label': 'Company Coming',
+                'title': job[0],
+                'detail': job[1],
+                'meta': 'Apply before ' + str(job[2])
+            })
+
+        cur.execute("""
+            SELECT company_name
+            FROM companies
+            ORDER BY id DESC
+            LIMIT 2
+        """)
+        recent_companies = cur.fetchall()
+
+        for company in recent_companies:
+            news_items.append({
+                'label': 'New Company',
+                'title': company[0],
+                'detail': 'Registration completed',
+                'meta': 'Ready for campus hiring'
+            })
+
+        cur.execute("SELECT COUNT(*) FROM jobs")
+        stats['active_jobs'] = cur.fetchone()[0]
+
+        cur.execute("SELECT COUNT(*) FROM companies")
+        stats['companies'] = cur.fetchone()[0]
+
+        cur.execute("""
+            SELECT COUNT(*)
+            FROM students
+            WHERE placement_status='Placed'
+        """)
+        stats['placed_students'] = cur.fetchone()[0]
+
+        cur.close()
+
+    except Exception:
+        news_items = []
+
+    return render_template(
+        'index.html',
+        news_items=news_items,
+        stats=stats
+    )
 
 
 # Register

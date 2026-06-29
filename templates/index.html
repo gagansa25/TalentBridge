@@ -31,22 +31,72 @@
 
 </nav>
 
-    <section class="hero">
-        <h1>Bridging Students and Recruiters</h1>
-        <p>Find opportunities, showcase skills, and build your career.</p>
+    <main class="home-layout">
+        <section class="hero">
+            <h1>Bridging Students and Recruiters</h1>
+            <p>Find opportunities, showcase skills, and build your career.</p>
 
-       <div class="buttons">
+            <div class="buttons">
 
-    <a href="/register" class="btn">
-        Student Register
-    </a>
+                <a href="/register" class="btn">
+                    Student Register
+                </a>
 
-    <a href="/company_register" class="btn-outline">
-        Company Register
-    </a>
+                <a href="/company_register" class="btn-outline">
+                    Company Register
+                </a>
 
-</div>
-    </section>
+            </div>
+        </section>
+
+        <section class="news-section">
+            <div class="news-header">
+                <div>
+                    <span class="eyebrow">Latest Updates</span>
+                    <h2>News Flash</h2>
+                </div>
+
+                <a href="/jobs" class="view-jobs">View Jobs</a>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <strong>{{ stats.active_jobs }}</strong>
+                    <span>Active Jobs</span>
+                </div>
+
+                <div class="stat-box">
+                    <strong>{{ stats.companies }}</strong>
+                    <span>Companies</span>
+                </div>
+
+                <div class="stat-box">
+                    <strong>{{ stats.placed_students }}</strong>
+                    <span>Completed Placements</span>
+                </div>
+            </div>
+
+            <div class="news-grid">
+                {% if news_items %}
+                    {% for item in news_items %}
+                        <article class="news-card">
+                            <span>{{ item.label }}</span>
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.detail }}</p>
+                            <small>{{ item.meta }}</small>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <article class="news-card empty-news">
+                        <span>News Flash</span>
+                        <h3>No updates yet</h3>
+                        <p>New company visits, job posts, and completed placements will appear here.</p>
+                        <small>Check back soon</small>
+                    </article>
+                {% endif %}
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>
