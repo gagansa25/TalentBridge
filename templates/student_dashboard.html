@@ -1,118 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TalentBridge Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentBridge Student Dashboard</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
-<div class="sidebar">
-
-    <h2>TalentBridge</h2>
-
-    <ul>
-        <li><a href="#"><i class='bx bxs-dashboard'></i> Dashboard</a></li>
-        <li><a href="#"><i class='bx bxs-briefcase'></i> Jobs</a></li>
-        <li><a href="#"><i class='bx bxs-file'></i> Resume</a></li>
-        <li><a href="#"><i class='bx bxs-user'></i> Profile</a></li>
-    </ul>
-
-</div>
-
-<div class="main-content">
-
-    <div class="header">
-        <h1>Welcome, {{ user[1] }} 👋</h1>
-    </div>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>Student Profile</h3>
-
-            <p><strong>Name:</strong> {{ user[1] }}</p>
-            <p><strong>Email:</strong> {{ user[2] }}</p>
-            <p><strong>Course:</strong> {{ user[4] }}</p>
-            <p><strong>Skills:</strong> {{ user[5] }}</p>
-
+<div class="dashboard-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>TalentBridge</h2>
+            <p>Student Portal</p>
         </div>
-<div class="card">
 
-    <h3>Upload Resume</h3>
-
-    <form action="/upload_resume"
-          method="POST"
-          enctype="multipart/form-data">
-
-        <input type="hidden"
-               name="email"
-               value="{{ user[2] }}">
-
-        <input type="file"
-               name="resume"
-               accept=".pdf"
-               required>
-
-        <br><br>
-
-        <button type="submit">
-            Upload Resume
-        </button>
-
-    </form>
-
-    {% if message %}
-    <p style="color:green; margin-top:10px;">
-        {{ message }}
-    </p>
-    {% endif %}
-
-</div>
-        <div class="card">
-
-            <h3>Available Jobs</h3>
-
+        <nav>
             <ul>
-                <li>Frontend Developer</li>
-                <li>Python Developer</li>
-                <li>Full Stack Developer</li>
-                <li>Software Engineer</li>
+                <li><a href="#" class="active"><i class='bx bxs-dashboard'></i> Dashboard</a></li>
+                <li><a href="/jobs"><i class='bx bxs-briefcase'></i> Jobs</a></li>
+                <li><a href="/profile/{{ user[2] }}"><i class='bx bxs-user'></i> Profile</a></li>
+                <li><a href="/my_applications"><i class='bx bxs-folder'></i> My Applications</a></li>
             </ul>
+        </nav>
+    </aside>
 
-        </div>
-<div class="card">
-    <h3>Available Jobs</h3>
-    <p>View all placement opportunities.</p>
-    <a href="/jobs">
-    <button>View Available Jobs</button>
-</a>
-</div>
+    <main class="main-content">
+        <header class="dashboard-header">
+            <div>
+                <span class="eyebrow">Good to see you</span>
+                <h1>{{ user[1] }}</h1>
+                <p>Track your applications, upload your resume, and explore the latest jobs right from your dashboard.</p>
+            </div>
+            <div class="header-actions">
+                <a href="/jobs" class="btn btn-primary">Browse Jobs</a>
+                <a href="/my_applications" class="btn btn-secondary">My Applications</a>
+                <a href="/logout" class="btn btn-secondary">Logout</a>
+            </div>
+        </header>
 
-<div class="card">
-    <h3>My Resume</h3>
-    <p>Upload and manage your resume.</p>
-</div>
+        <section class="stats-grid">
+            <article class="stat-card">
+                <span>Profile</span>
+                <h3>{{ user[1] }}</h3>
+                <p>{{ user[4] }} · {{ user[5] }}</p>
+            </article>
+            <article class="stat-card">
+                <span>Contact</span>
+                <h3>{{ user[2] }}</h3>
+                <p>Student communication email.</p>
+            </article>
+            <article class="stat-card">
+                <span>Status</span>
+                <h3>{{ user[6] or 'Not set' }}</h3>
+                <p>Placement status for campus recruitment.</p>
+            </article>
+        </section>
 
-<div class="card">
-    <h3>Profile</h3>
-    <p>Update your profile details.</p>
-</div>
-    </div>
-    <a href="/my_applications">
-    <button>My Applications</button>
-</a>
+        <section class="card-grid">
+            <article class="dashboard-card">
+                <h2>Resume Upload</h2>
+                <p>Upload your latest resume so employers can review your profile instantly.</p>
+                <form action="/upload_resume" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="email" value="{{ user[2] }}">
+                    <input type="file" name="resume" accept=".pdf" required>
+                    <button type="submit" class="btn btn-primary">Upload Resume</button>
+                </form>
+                {% if message %}
+                <p class="message">{{ message }}</p>
+                {% endif %}
+            </article>
 
+            <article class="dashboard-card">
+                <h2>Quick access</h2>
+                <div class="action-list">
+                    <a href="/jobs" class="action-card">
+                        <i class='bx bxs-briefcase'></i>
+                        <div>
+                            <h3>Latest jobs</h3>
+                            <p>Find relevant placement opportunities.</p>
+                        </div>
+                    </a>
+                    <a href="/my_applications" class="action-card">
+                        <i class='bx bxs-folder-open'></i>
+                        <div>
+                            <h3>My applications</h3>
+                            <p>Check your current application progress.</p>
+                        </div>
+                    </a>
+                    <a href="/profile/{{ user[2] }}" class="action-card">
+                        <i class='bx bxs-user'></i>
+                        <div>
+                            <h3>Edit profile</h3>
+                            <p>Update your details before applying.</p>
+                        </div>
+                    </a>
+                </div>
+            </article>
+        </section>
+    </main>
 </div>
 
 </body>
 </html>
-{% if message %}
-<p style="color:green; margin-top:10px;">
-    {{ message }}
-</p>
-{% endif %}

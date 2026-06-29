@@ -13,163 +13,101 @@
 </head>
 <body>
 
-<!-- Navbar -->
-
 <nav class="navbar">
-
-    <div class="logo">
-        TalentBridge Admin
+    <div class="brand-area">
+        <div class="logo">TalentBridge Admin</div>
+        <p class="brand-subtitle">Central control panel for campus hiring and student placements.</p>
     </div>
 
     <div class="nav-links">
-
-        <a href="/manage_students">
-            <i class='bx bxs-user'></i>
-            Students
-        </a>
-
-        <a href="/manage_jobs">
-            <i class='bx bxs-briefcase'></i>
-            Jobs
-        </a>
-
-        <a href="/add_job">
-            <i class='bx bx-plus-circle'></i>
-            Add Job
-        </a>
-
-        <a href="/manage_companies">
-            <i class='bx bxs-building'></i>
-            Companies
-        </a>
-
-        <a href="/company_login">
-            <i class='bx bxs-building-house'></i>
-            Company Portal
-        </a>
-
-        <a href="/" class="logout-btn">
-            <i class='bx bx-log-out'></i>
-            Logout
-        </a>
-
+        <a href="/manage_students" class="nav-btn"><i class='bx bxs-user'></i> Students</a>
+        <a href="/manage_jobs" class="nav-btn"><i class='bx bxs-briefcase'></i> Jobs</a>
+        <a href="/add_job" class="nav-btn"><i class='bx bx-plus-circle'></i> Add Job</a>
+        <a href="/manage_companies" class="nav-btn"><i class='bx bxs-building'></i> Companies</a>
+        <a href="/company_login" class="nav-btn"><i class='bx bxs-building-house'></i> Company Portal</a>
+        <a href="/logout" class="nav-btn logout-btn"><i class='bx bx-log-out'></i> Logout</a>
     </div>
-
 </nav>
 
-<!-- Main -->
-
 <div class="main-content">
-
     <div class="banner">
-
-        <h1>Welcome Administrator 👋</h1>
-
-        <p>
-            Manage Students, Companies, Jobs and Placement Activities
-        </p>
-
+        <div>
+            <h1>Welcome Administrator 👋</h1>
+            <p>Monitor activity, manage users, and keep placement operations moving smoothly.</p>
+        </div>
+        <div class="banner-actions">
+            <a href="/add_job" class="btn btn-primary">Post a Job</a>
+            <a href="/manage_students" class="btn btn-secondary">Review Students</a>
+        </div>
     </div>
-
-    <!-- Statistics -->
 
     <div class="cards">
-
         <div class="card">
-            <i class='bx bxs-user'></i>
+            <span>Total Students</span>
             <h2>{{ total_students }}</h2>
-            <p>Total Students</p>
+            <p>Active student records in the system.</p>
         </div>
-
         <div class="card">
-            <i class='bx bxs-briefcase'></i>
+            <span>Total Jobs</span>
             <h2>{{ total_jobs }}</h2>
-            <p>Total Jobs</p>
+            <p>Open hiring opportunities.</p>
         </div>
-
         <div class="card">
-            <i class='bx bxs-file'></i>
+            <span>Applications</span>
             <h2>{{ total_applications }}</h2>
-            <p>Applications</p>
+            <p>Submitted candidate applications.</p>
         </div>
-
         <div class="card">
-            <i class='bx bxs-building'></i>
+            <span>Companies</span>
             <h2>{{ total_companies }}</h2>
-            <p>Companies</p>
+            <p>Registered hiring organizations.</p>
         </div>
-
     </div>
 
-    <!-- Quick Actions -->
+    <div class="dashboard-grid">
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Quick actions</h2>
+            </div>
+            <div class="quick-actions">
+                <a href="/manage_students" class="action-btn"><i class='bx bxs-user'></i> Manage Students</a>
+                <a href="/manage_jobs" class="action-btn"><i class='bx bxs-briefcase'></i> Manage Jobs</a>
+                <a href="/manage_companies" class="action-btn"><i class='bx bxs-building'></i> Manage Companies</a>
+                <a href="/company_login" class="action-btn"><i class='bx bxs-building-house'></i> Company Portal</a>
+            </div>
+        </section>
 
-    <div class="quick-actions">
-
-        <a href="/manage_students" class="action-btn">
-            <i class='bx bxs-user'></i>
-            Manage Students
-        </a>
-
-        <a href="/manage_jobs" class="action-btn">
-            <i class='bx bxs-briefcase'></i>
-            Manage Jobs
-        </a>
-
-        <a href="/add_job" class="action-btn">
-            <i class='bx bx-plus-circle'></i>
-            Add Job
-        </a>
-
-        <a href="/manage_companies" class="action-btn">
-            <i class='bx bxs-building'></i>
-            Manage Companies
-        </a>
-
+        <section class="panel activity-panel">
+            <div class="panel-header">
+                <h2>Recent activity</h2>
+            </div>
+            <div class="activity-box">
+                <p>✅ New student registrations are live.</p>
+                <p>💼 Recent jobs posted by employer partners.</p>
+                <p>📄 Resumes uploaded and ready for review.</p>
+                <p>🏢 New company accounts approved.</p>
+            </div>
+        </section>
     </div>
-
-    <!-- Recent Activity -->
-
-    <div class="section">
-
-        <h2>Recent Activity</h2>
-
-        <div class="activity-box">
-
-            <p>✅ New Student Registered</p>
-            <p>💼 New Job Posted</p>
-            <p>📄 Resume Uploaded</p>
-            <p>🏢 Company Registered</p>
-
-        </div>
-
-    </div>
-
-    <!-- Analytics -->
 
     <div class="analytics">
-
         <div class="analytics-card">
             <h3>Applications Received</h3>
             <h2>{{ total_applications }}</h2>
         </div>
-
         <div class="analytics-card">
             <h3>Registered Companies</h3>
             <h2>{{ total_companies }}</h2>
         </div>
-
         <div class="analytics-card">
             <h3>Placed Students</h3>
             <h2>{{ placed_students }}</h2>
         </div>
-
         <div class="analytics-card">
             <h3>Not Placed Students</h3>
             <h2>{{ not_placed_students }}</h2>
         </div>
-
     </div>
-
 </div>
 
 </body>

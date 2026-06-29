@@ -144,15 +144,11 @@ def login():
     return render_template('login.html')
 
 
-# Upload Resume
-@app.route('/upload_resume', methods=['POST'])
-def upload_resume():
+# Logout
+@app.route('/logout')
+def logout():
+    return redirect('/')
 
-    file = request.files.get('resume')
-    email = request.form.get('email')
-
-    if not file:
-        return "No file selected"
 
     filename = file.filename
 
@@ -258,12 +254,13 @@ def apply_job(job_id):
 
         cur.execute("""
             INSERT INTO applications
-            (student_email, company_name, job_title)
-            VALUES (%s,%s,%s)
+            (student_email, company_name, job_title, status)
+            VALUES (%s,%s,%s,%s)
         """, (
             student_email,
             company_name,
-            job_title
+            job_title,
+            'Other'
         ))
 
         mysql.connection.commit()

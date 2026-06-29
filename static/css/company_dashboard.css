@@ -36,8 +36,29 @@ body{
     border-radius:8px;
 }
 
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:8px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
 .nav-links a:hover{
     background:#1e293b;
+    transform: translateY(-1px);
+}
+
+.logout-btn{
+    background: #ef4444;
+    color: white;
+}
+
+.logout-btn:hover{
+    background: #dc2626;
 }
 
 .main-content{

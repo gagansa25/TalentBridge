@@ -14,30 +14,27 @@
 <!-- Navbar -->
 
 <nav class="navbar">
-
-    <div class="logo">
-        {{ company[1] }}
+    <div class="brand-area">
+        <div class="logo">
+            {{ company[1] }}
+        </div>
+        <p class="brand-subtitle">Company dashboard for hiring and applicant tracking</p>
     </div>
 
     <div class="nav-links">
-
-        <a href="/add_job">
+        <a href="/add_job" class="nav-btn">
             <i class='bx bx-plus-circle'></i>
             Post Job
         </a>
-
-        <a href="/company_applicants">
+        <a href="/company_applicants" class="nav-btn">
             <i class='bx bxs-file'></i>
             Applicants
         </a>
-
-        <a href="/">
+        <a href="/logout" class="nav-btn logout-btn">
             <i class='bx bx-log-out'></i>
             Logout
         </a>
-
     </div>
-
 </nav>
 
 <!-- Main Content -->
